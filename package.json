@@ -12,6 +12,6 @@
         "util": "^0.12.5"
     },
     "dependencies": {
-        "@bjorn3/browser_wasi_shim": "^0.2.7"
+        "@bjorn3/browser_wasi_shim": "0.2.2"
     }
 }

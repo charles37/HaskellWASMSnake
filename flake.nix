@@ -25,12 +25,12 @@
               runtimeInputs = [
                 pkgs.nodejs
                 ghc-wasm-meta.packages.${system}.default
-                pkgs.busybox
+                # pkgs.busybox
               ];
               text = ''
                 npm install
                 npm run build
-                wasm32-wasi-cabal build -v
+                wasm32-wasi-cabal build
                 HaskellWASMSnake=$(wasm32-wasi-cabal list-bin exe:HaskellWASMSnake)
                 cp "$HaskellWASMSnake" dist
               '';

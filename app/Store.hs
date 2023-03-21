@@ -1,8 +1,4 @@
-{- cabal:
-build-depends: base, containers
--}
-
-module Store (save1, load1, size1, save2, load2, size2) where
+module Store where
 
 import           Control.Concurrent.MVar
 import           Data.IORef

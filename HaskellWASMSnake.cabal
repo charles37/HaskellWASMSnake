@@ -1,4 +1,4 @@
-cabal-version:      3.4
+cabal-version:      3.8
 -- The cabal-version field refers to the version of the .cabal specification,
 -- and can be different from the cabal-install (the tool) version and the
 -- Cabal (the library) version you are using. As such, the Cabal (the library)
@@ -80,7 +80,7 @@ common warnings
 
 executable HaskellWASMSnake
     main-is: Main.hs
-    hs-source-dirs: src
+    hs-source-dirs: app
     default-language: Haskell2010
     other-modules: Store
     default-extensions:
@@ -88,7 +88,7 @@ executable HaskellWASMSnake
         OverloadedStrings
     ghc-options:
         -no-hs-main -optl-mexec-model=reactor
-        "-optl-Wl,--export=hs_init,--export=malloc,--export=mallocPtr,--export=freePtr,--export=updateGameState, --export=updateGameStateIO, --export=save, --export=load, --export=echo"
+        "-optl-Wl,--export=hs_init,--export=updateGameStateIO,--export=save,--export=load,--export=echo,--export=freeBuffer,--export=callocBuffer,--export=size"
         -Weverything
         -Wno-missing-safe-haskell-mode
         -Wno-implicit-prelude

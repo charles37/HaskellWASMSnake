@@ -1,4 +1,4 @@
-module WasmComm where
+module Main where
 
 import           Foreign.C.String
 import           Foreign.Marshal.Alloc
@@ -6,10 +6,20 @@ import           Foreign.Ptr
 import           Store
 
 import Prelude hiding (Left, Right)
--- import System.Random.Mersenne (randomIO)
-import System.Random (randomRIO)
-import Data.IORef
-import System.IO.Unsafe
+import System.Random.Mersenne (randomIO)
+-- import System.Random (randomRIO)
+
+import           Control.Concurrent.MVar
+import           Data.IORef
+import qualified Data.Map                as M
+import           System.IO.Unsafe
+
+
+
+
+------------------------------------
+
+------------------------------------
 
 
 main :: IO ()
@@ -17,6 +27,8 @@ main = mempty
 
 foreign export ccall callocBuffer :: Int -> IO (Ptr a)
 callocBuffer = callocBytes
+
+
 foreign export ccall freeBuffer :: Ptr a -> IO ()
 freeBuffer = free
 
@@ -57,19 +69,19 @@ initialGameStateIO = do
   let initialSnake = [(width `div` 2, height `div` 2)]
   GameState initialSnake Right <$> randomPosition
 
--- randomPosition :: IO Position
--- randomPosition = do
---   x <- randomIO --(0, width - 1)
---   y <- randomIO --(0, height - 1)
---   let x' = x `mod` width
---   let y' = y `mod` height
---   pure (x', y')
-
 randomPosition :: IO Position
 randomPosition = do
-  x <- randomRIO (0, width - 1)
-  y <- randomRIO (0, height - 1)
-  pure (x, y)
+  x <- randomIO --(0, width - 1)
+  y <- randomIO --(0, height - 1)
+  let x' = x `mod` width
+  let y' = y `mod` height
+  pure (x', y')
+
+-- randomPosition :: IO Position
+-- randomPosition = do
+--   x <- randomRIO (0, width - 1)
+--   y <- randomRIO (0, height - 1)
+--   pure (x, y)
 
 initialGameState :: IORef GameState
 {-# NOINLINE initialGameState #-}
