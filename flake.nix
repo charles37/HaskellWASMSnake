@@ -1,7 +1,7 @@
 {
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    ghc-wasm-meta.url = "gitlab:ghc/ghc-wasm-meta?host=gitlab.haskell.org";
+    ghc-wasm-meta.url = "gitlab:ghc/ghc-wasm-meta/1b4a14b3?host=gitlab.haskell.org";
   };
   outputs = {
     self,
@@ -29,7 +29,6 @@
             runtimeInputs = [
               pkgs.nodejs
               ghc-wasm-meta.packages.${system}.default
-              # pkgs.busybox
             ];
             text = ''
               npm install
@@ -43,5 +42,3 @@
       }
     );
 }
-# --with-gcc ${pkgs.gcc}/bin/gcc
-
